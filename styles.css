@@ -1,0 +1,60 @@
+div.container {
+    width: 1080px;
+    border: 1px solid black;
+	display: block;
+	margin: 0 auto;
+}
+
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+
+category {
+    float: left;
+    max-width: 206px;
+}
+
+main {
+    margin-left: 206px;
+	margin-right: 3px;
+	margin-bottom: 3px;
+    border: 1px solid black;
+    padding: 1em;
+	overflow: hidden;
+}
+
+izdelek {
+	position: relative;
+	display:block;
+	float: left;
+	width: 400px;
+	height: 200px;
+	border: 1px solid black;
+	margin: 8px;
+	padding: 0;
+}
+
+izdelek ime {
+	margin-left: 3px;
+	margin-top: 3px;
+}
+
+izdelek ocena {
+	position: absolute;
+    bottom: 0;
+	left: 0;
+	margin-left: 3px;
+	margin-bottom: 3px;
+}
+
+izdelek cena {
+	position: absolute;
+    bottom: 0;
+	right: 0;
+	margin-right: 3px;
+	margin-bottom: 3px;
+}
