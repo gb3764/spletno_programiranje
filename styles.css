@@ -1,49 +1,130 @@
-div.container {
-    width: 1080px;
-    border: 1px solid black;
-	display: block;
-	margin: 0 auto;
+.container {
+    width:1080px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.orodnavrsticabutton {
+	margin-top:10px;
+	height: 40px;
+	width: 25vw;
+}
+
+.headerbutton {
+	float: right;
+	margin: 3px;
+}
+
+.category {
+	height: 40px;
+	width: 200px;
+}
+
+.izdelekbutton {
+	height: 40px;
+	width: 33vw;
+}
+
+.faza {
+	border-right: 1px solid black;
+}
+
+.nextfaza {
+	height: 97px;
+	width: 467px;
+}
+
+ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+vsebina {
+	flex-grow:1;
+	display:flex;
+	flex-flow:row;
+	background-color: #F5DEB3;
+}
+
+body {
+	margin: 0;
+	box-sizing:border-box;
+	display:flex;
+	flex-flow:column;
+	min-height:100vh;
+	background-color: #FFFACD;
 }
 
 header, footer {
-    padding: 1em;
     color: white;
-    background-color: black;
-    clear: left;
-    text-align: center;
+    background-color: #8B4513;
 }
 
-category {
-    float: left;
-    max-width: 206px;
+orodnavrstica {
+	display:flex;
+	flex-flow:row;
+	height: 120px;
+	background-color: #F5DEB3;
+}
+
+breadcrumb {
+	background-color: #F5DEB3;
 }
 
 main {
-    margin-left: 206px;
-	margin-right: 3px;
-	margin-bottom: 3px;
-    border: 1px solid black;
-    padding: 1em;
-	overflow: hidden;
+	display:flex;
+	flex-flow:row;
+	flex-wrap: wrap;
+	max-width:880px;
+}
+
+mainizdelek {
+	display:flex;
+	flex-flow:column;
+	flex-wrap: wrap;
+	max-width:880px;
 }
 
 izdelek {
 	position: relative;
 	display:block;
 	float: left;
-	width: 400px;
-	height: 200px;
+	width: 420px;
+	height: 250px;
 	border: 1px solid black;
 	margin: 8px;
 	padding: 0;
+}
+
+izdelek ime {
+	margin-left: 3px;
+	margin-top: 3px;
+}
+
+izdelek ocena {
+	position: absolute;
+    bottom: 0;
+	left: 0;
+	margin-left: 3px;
+	margin-bottom: 3px;
+}
+
+izdelek cena {
+	position: absolute;
+    bottom: 0;
+	right: 0;
+	margin-right: 3px;
+	margin-bottom: 3px;
 }
 
 slika {
 	position: relative;
 	display:block;
 	float: left;
-	width: 100%;
+	width: 880px;
 	height: 400px;
+	box-sizing:border-box;
 	border: 1px solid black;
 	padding: 0;
 	margin-top: 3px;
@@ -55,8 +136,8 @@ izdelekcontent {
 	float: left;
 	width: 100%;
 	height: 200px;
+	box-sizing:border-box;
 	border: 1px solid black;
-	margin-top: 3px;
 	padding: 0;
 }
 
@@ -88,82 +169,199 @@ izdelekcontent kosarica {
 }
 
 izdelekmenu {
-	position: relative;
-	display:block;
-	float: left;
-	width: 100%;
-	height: 40px;
-	padding: 0;
-	margin-top: 3px;
-}
-
-izdelek ime {
-	margin-left: 3px;
-	margin-top: 3px;
-}
-
-izdelek ocena {
-	position: absolute;
-    bottom: 0;
-	left: 0;
-	margin-left: 3px;
-	margin-bottom: 3px;
-}
-
-izdelek cena {
-	position: absolute;
-    bottom: 0;
-	right: 0;
-	margin-right: 3px;
-	margin-bottom: 3px;
+	display:flex;
+	flex-flow:row;
 }
 
 faze {
-	position: relative;
-	margin: 3px;
-	margin-top: 60px;
-	margin-bottom: 10px;
-	width: 100% - 6px;
+	display:flex;
+	flex-flow:row;
+	width: 880px;
+	box-sizing:border-box;
 	height: 60px;
-	display: block;
     border: 1px solid black;
-	overflow: hidden;
+	background-color: #F5DEB3;
 }
 
 faze faza{
-	position: absolute;
-	width: 268px;
-	height: 60px;
+	position: relative;
+	width: 25vw;
 	display: block;
 	text-align: center;
 }
 
 kosaricacontainer {
-	position: relative;
-	width: 100% - 6px;
-	height: 508px;
-	display: block;
-	overflow: hidden;
-	margin-bottom: 10px;
+	display:flex;
+	flex-flow:row;
 }
 
 kosaricacontent {
-	position: absolute;
+	position: relative;
 	margin: 3px;
+	margin-left: 0;
 	width: 610px;
 	height: 500px;
+	box-sizing:border-box;
 	display: block;
     border: 1px solid black;
 	overflow: hidden;
 }
 
 kosaricahelp {
-	position: absolute;
+	display:flex;
+	flex-flow:column;
+}
+
+kosaricahelp help {
+	position: relative;
 	margin: 3px;
-	margin-left: 618px;
-	width: 457px;
+	margin-left: 0;
+	margin-right: 0;
+	width: 467px;
 	height: 400px;
+	box-sizing:border-box;
 	display: block;
     border: 1px solid black;
 	overflow: hidden;
+}
+
+@media screen
+  and (max-width: 550px) {
+    orodnavrstica {
+		margin-top: 0;
+	}
+	vsebina {
+		flex-flow: column;
+	}
+	main {
+		flex-flow: column;
+	}
+	.orodnavrsticabutton {
+		margin-top:0;
+		height: 40px;
+		width: 100vw;
+	}
+	.category {
+		height: 40px;
+		width: 100vw;
+	}
+	orodnavrstica {
+		flex-flow:column;
+	}
+	izdelek {
+		width: 90vw;
+	}
+	.izdelekbutton {
+		width: 100vw;
+	}
+	slika {
+		width: 95vw;
+	}
+	izdelekcontent {
+		width: 95vw;
+	}
+	izdelekmenu {
+		flex-flow:column;
+		width: 95vw;
+	}
+	.container {
+		width:100vw;
+	}
+	faze {
+		flex-flow:column;
+		height: 120px;
+	}
+	faze faza {
+		width: 100vw;
+		height: 40px;
+	}
+	.faza {
+		border-right: 0;
+		border-bottom: 1px solid black;
+	}
+	kosaricacontainer {
+		flex-flow:column;
+	}
+	kosaricacontent {
+		width: 100vw;
+	}
+	kosaricahelp help {
+		width: 100vw;
+	}
+	.nextfaza {
+		width: 100vw;
+	}
+}
+
+@media screen
+  and (max-width: 800px) and (min-width: 550px) {
+    .headerbutton {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	izdelek {
+		width: 60vw;
+	}
+	main {
+		flex-flow: column;
+	}
+	slika {
+		width: 65vw;
+	}
+	izdelekcontent {
+		width: 65vw;
+	}
+	izdelekmenu {
+		width: 65vw;
+	}
+	.container {
+		width:100vw;
+	}
+	kosaricacontent {
+		width: 57vw;
+		margin-right: 0;
+	}
+	kosaricahelp help {
+		width: 43vw;
+		border-left:0;
+	}
+	.nextfaza {
+		width: 43vw;
+	}
+}
+
+@media screen
+  and (max-width: 1080px) and (min-width: 800px) {
+    .headerbutton {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	izdelek {
+		width: 35vw;
+	}
+	.container {
+		width:100vw;
+	}
+	slika {
+		width: 75vw;
+	}
+	izdelekcontent {
+		width: 75vw;
+	}
+	izdelekmenu {
+		width: 75vw;
+	}
+	kosaricacontent {
+		width: 57vw;
+		margin-right: 0;
+	}
+	kosaricahelp help {
+		width: 43vw;
+		border-left:0;
+	}
+	.nextfaza {
+		width: 43vw;
+	}
 }

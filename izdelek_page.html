@@ -8,43 +8,47 @@
 	</head>
 	
 	<body>
-		<div class="container">
-			
-			<button type="button" style="float: right; margin-top: 1px; margin-right: 1px;">prijava / registracija</button>
-			<button type="button" style="float: right;margin-right: 1px; margin-top: 1px;">košarica</button>
-			
-			<header>
-				<h1>logo / banner</h1>
-			</header>
-			
-			<div style="margin-top: 30px; margin-bottom: 20px; height: 40px;">
-				<button type="button" style="height: 40px; width: 200px; margin-left: 3px;">kontakt</button>
-				<button type="button" style="height: 40px; width: 200px;">o nas</button>
-				<button type="button" style="height: 40px; width: 200px;">pogoji poslovanja</button>
-				<button type="button" style="height: 40px; width: 200px;">akcije</button>
-				<input type="search" name="search" style="float: right; height: 40px; width: 258px; margin-right: 3px;"">
+		<header class="container">
+			<div class="headerbutton">
+				<button type="button">košarica</button>
+				<button type="button">prijava</button>
+				<button type="button">registracija</button>
 			</div>
-			
-			<div style="margin-left: 208px; margin-bottom: 22px;">
-				pot->do->izdelka
-			</div>
+			<h1 style="float:left;">logo / banner</h1>
+		</header>
+		
+		<orodnavrstica class="container">
+			<button type="button" class="orodnavrsticabutton">kontakt</button>
+			<button type="button" class="orodnavrsticabutton">o nas</button>
+			<button type="button" class="orodnavrsticabutton">pogoji poslovanja</button>
+			<input type="search" name="search" class="orodnavrsticabutton">
+		</orodnavrstica>
+		
+		<breadcrumb class="container">
+			Izberite izdelek!
+		</breadcrumb>
+		
+		<vsebina class="container">
 			
 			<category>
-				<button type="button" style="height: 40px; width: 200px; margin-left: 3px;">kategorija</button>
-				<button type="button" style="height: 40px; width: 200px; margin-left: 3px; margin-top: 1px;">kategorija</button>
-				<button type="button" style="height: 40px; width: 200px; margin-left: 3px; margin-top: 1px;">kategorija</button>
-				<button type="button" style="height: 40px; width: 200px; margin-left: 3px; margin-top: 1px;">kategorija</button>
-				<button type="button" style="height: 40px; width: 200px; margin-left: 3px; margin-top: 1px;">kategorija</button>
-				<button type="button" style="height: 40px; width: 200px; margin-left: 3px; margin-top: 1px;">kategorija</button>
+				<ul>
+					<li><button type="button" class="category">kategorija</button></li>
+					<li><button type="button" class="category">kategorija</button></li>
+					<li><button type="button" class="category">kategorija</button></li>
+				</ul>
 			</category>
 
-			<main>
-				ime izdelka
-				<slika>slika</slika>
+			<mainizdelek>
+				<imeizdelka>
+					ime izdelka
+				</imeizdelka>
+				<slika>
+					slika
+				</slika>
 				<izdelekmenu>
-					<button type="button" style="height: 40px; width: 276px; margin-left: 1px">opis</button>
-					<button type="button" style="height: 40px; width: 276px;">specifikacije</button>
-					<button type="button" style="height: 40px; width: 276px;">ocene</button>
+					<button type="button" class="izdelekbutton">opis</button>
+					<button type="button" class="izdelekbutton">specifikacije</button>
+					<button type="button" class="izdelekbutton">ocene</button>
 				</izdelekmenu>
 				<izdelekcontent>
 					<content>opis / specifikacije / ocene</content>
@@ -55,11 +59,13 @@
 						<button type="button" style="height: 40px; width: 100%;">v košarico</button>
 					</kosarica>
 				</izdelekcontent>
-			</main>
+			</mainizdelek>
 
-			<footer>footer</footer>
-
-		</div>
+		</vsebina>
+		
+		<footer class="container">
+			footer
+		</footer>
 
 	</body>
 </html>
