@@ -10,53 +10,77 @@
 	<body>
 		<header class="container">
 			<div class="headerbutton">
-				<button type="button">košarica</button>
-				<button type="button">prijava</button>
-				<button type="button">registracija</button>
+				<label class="bannerbutton">
+					<input type="checkbox" style="display:none" required />
+					<span>
+						prijava / registracija
+					</span>
+					<div id="popup">
+						<form method="POST" action="landing_page.html">
+							<label>uporabniško ime: <br><input type="text" name="uporabniskoime" required /></label><br>
+							<label>geslo: <br><input type="password" name="geslo" required /></label><br>
+							<input type="submit" value="Prijavi se" style="margin-top:3px;"/>
+							<input type="submit" value="Registriraj se" style="margin-top:3px;"/>
+						</form>
+					</div>
+				</label>
+				<label class="bannerbutton">
+					<a href="kosarica_page1.html">košarica</a>
+				</label>
 			</div>
-			<h1 style="float:left;">logo / banner</h1>
+			<h1 style="float:left; margin-left:3px;"><a href="landing_page.html" style="color:white; text-decoration:none;">♫ Music Market</a></h1>
 		</header>
 		
 		<orodnavrstica class="container">
-			<button type="button" class="orodnavrsticabutton">kontakt</button>
-			<button type="button" class="orodnavrsticabutton">o nas</button>
-			<button type="button" class="orodnavrsticabutton">pogoji poslovanja</button>
-			<input type="search" name="search" class="orodnavrsticabutton">
+			<label class="orodnavrsticabutton">
+				<a href="kontakt.html">kontakt</a>
+			</label>
+			<label class="orodnavrsticabutton">
+				<a href="o_nas.html">o nas</a>
+			</label>
+			<label class="orodnavrsticabutton">
+				<a href="pogoji_poslovanja.html">pogoji poslovanja</a>
+			</label>
+			<input type="search" name="search" class="search" placeholder="iščite tukaj..">
 		</orodnavrstica>
-		
-		<breadcrumb class="container">
-			Izberite izdelek!
-		</breadcrumb>
 		
 		<vsebina class="container">
 			
 			<category>
 				<ul>
-					<li><button type="button" class="category">kategorija</button></li>
-					<li><button type="button" class="category">kategorija</button></li>
-					<li><button type="button" class="category">kategorija</button></li>
+					<li><button type="button" class="category">Pop</button></li>
+					<li><button type="button" class="category">Rock</button></li>
+					<li><button type="button" class="category">Metal</button></li>
+					<li><button type="button" class="category">Electronic</button></li>
+					<li><button type="button" class="category">Hip hop</button></li>
+					<li><button type="button" class="category">Blues</button></li>
+					<li><button type="button" class="category">Jazz</button></li>
+					<li><button type="button" class="category">Classical</button></li>
 				</ul>
 			</category>
 
 			<mainizdelek>
-				<imeizdelka>
-					ime izdelka
-				</imeizdelka>
 				<slika>
-					slika
+					<img src="images/kindofblue.jpg" alt="Kind of Blue">
 				</slika>
-				<izdelekmenu>
-					<button type="button" class="izdelekbutton">opis</button>
-					<button type="button" class="izdelekbutton">specifikacije</button>
-					<button type="button" class="izdelekbutton">ocene</button>
-				</izdelekmenu>
 				<izdelekcontent>
-					<content>opis / specifikacije / ocene</content>
+					<content>
+						<naslov>
+							Miles Davis - Kind of Blue
+						</naslov>
+						<ul>
+							<li>So What</li>
+							<li>Freddie Freeloader</li>
+							<li>Blue in Green</li>
+							<li>All Blues</li>
+							<li>Flamenco Sketches</li>
+						</ul>
+					</content>
 					<cena>
-						cena
+						10,00€
 					</cena>
 					<kosarica>
-						<button type="button" style="height: 40px; width: 100%;">v košarico</button>
+						<button type="button" class="bannerbutton" style="height: 40px; width: 100%;">v košarico</button>
 					</kosarica>
 				</izdelekcontent>
 			</mainizdelek>

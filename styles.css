@@ -8,6 +8,38 @@
 	margin-top:10px;
 	height: 40px;
 	width: 25vw;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+	padding-top: 8px;
+	background-color: #A9A9A9;
+	border-right: 2px solid #969696;
+	border-bottom: 2px solid #969696;
+	border-top: 2px solid #e0e0e0;
+	border-left: 2px solid #e0e0e0;
+	box-sizing:border-box;
+	font-family: "serif";
+}
+
+.bannerbutton {
+	background-color: #A9A9A9;
+    color: white;
+    text-align: center;
+    display: inline-block;
+	padding: 2px;
+	background-color: #A9A9A9;
+	border-right: 2px solid #969696;
+	border-bottom: 2px solid #969696;
+	border-top: 2px solid #e0e0e0;
+	border-left: 2px solid #e0e0e0;
+	box-sizing:border-box;
+}
+
+.search {
+	margin-top:10px;
+	height: 40px;
+	width: 25vw;
 }
 
 .headerbutton {
@@ -27,17 +59,95 @@
 
 .faza {
 	border-right: 1px solid black;
+	font-size: 20px;
+	background-color: #FFFACD;
 }
 
 .nextfaza {
 	height: 97px;
 	width: 467px;
+	background-color: #A9A9A9;
+    color: white;
+    text-align: center;
+    display: inline-block;
+	font-size: 25px;
+	font-family: "serif";
 }
 
-ul {
+.nextfazasubmit {
+	height: 97px;
+	width: 467px;
+	background-color: #A9A9A9;
+    color: white;
+    text-align: center;
+    display: inline-block;
+	font-size: 25px;
+	border-right: 2px solid #969696;
+	border-bottom: 2px solid #969696;
+	border-top: 2px solid #e0e0e0;
+	border-left: 2px solid #e0e0e0;
+	box-sizing:border-box;
+	padding-top: 32px;
+	font-family: "serif";
+	text-decoration: none;
+}
+
+input[type="checkbox"]~ div {
+	display:none;
+}
+
+input[type="checkbox"]:checked ~ div,
+#popup:target {
+	display:block;
+	background:#FFFACD;
+	color:black;
+	position:absolute;
+	border:1px black solid;
+	font-size:16px;
+	padding: 3px;
+	margin-top: 10px;
+	
+}
+
+genericcontent {
+	margin: 3px;
+}
+
+fieldset {
+	border:none;
+	display:flex;
+	flex-flow:column;
+}
+
+label a {
+	text-decoration: none;
+	color: white;
+	display:block;
+	height: 100%;
+}
+
+faza a {
+	padding-top: 15px;
+	text-decoration: none;
+	color: white;
+	display:block;
+	height: 100%;
+}
+
+faza label {
+	position: relative;
+	top: 15px;
+}
+
+category ul {
 	list-style:none;
 	margin:0;
 	padding:0;
+}
+
+category button {
+	background-color: #A9A9A9;
+    color: white;
 }
 
 vsebina {
@@ -77,37 +187,48 @@ main {
 	flex-flow:row;
 	flex-wrap: wrap;
 	max-width:880px;
+	height: 100%;
 }
 
 mainizdelek {
 	display:flex;
-	flex-flow:column;
+	flex-flow:row;
 	flex-wrap: wrap;
 	max-width:880px;
+	margin-left: 3px;
 }
 
 izdelek {
 	position: relative;
 	display:block;
 	float: left;
-	width: 420px;
+	width: 250px;
 	height: 250px;
 	border: 1px solid black;
-	margin: 8px;
+	margin: 10px;
 	padding: 0;
 }
 
 izdelek ime {
-	margin-left: 3px;
+	position: absolute;
+    top: 0;
+	left: 0;
 	margin-top: 3px;
+	margin-left: 3px;
+	background: #FFFACD;
+	border: 1px solid black;
+	font-size: 20px;
 }
 
-izdelek ocena {
+izdelek album {
 	position: absolute;
-    bottom: 0;
+    top: 0;
 	left: 0;
+	margin-top: 33px;
 	margin-left: 3px;
-	margin-bottom: 3px;
+	background: #FFFACD;
+	border: 1px solid black;
+	font-size: 20px;
 }
 
 izdelek cena {
@@ -116,29 +237,38 @@ izdelek cena {
 	right: 0;
 	margin-right: 3px;
 	margin-bottom: 3px;
+	display: block;
+	background: #FFFACD;
+	border: 1px solid black;
+	font-size: 20px;
 }
 
 slika {
 	position: relative;
 	display:block;
 	float: left;
-	width: 880px;
+	width: 400px;
 	height: 400px;
 	box-sizing:border-box;
 	border: 1px solid black;
 	padding: 0;
-	margin-top: 3px;
+}
+
+img {
+	width:100%;
+	height:100%;
 }
 
 izdelekcontent {
 	position: relative;
 	display:block;
 	float: left;
-	width: 100%;
-	height: 200px;
+	width: 400px;
+	height: 400px;
 	box-sizing:border-box;
 	border: 1px solid black;
 	padding: 0;
+	margin-left: 3px;
 }
 
 izdelekcontent content {
@@ -146,18 +276,12 @@ izdelekcontent content {
 	margin-top: 3px;
 }
 
-izdelekcontent cena {
-	position: absolute;
-    bottom: 0;
-	right: 0;
-	margin-right: 3px;
-	margin-bottom: 3px;
-	width: 150px;
-	height: 40px;
-	border: 1px solid black;
+izdelekcontent content naslov {
+	font-weight: bold;
+	font-size: 25px;
 }
 
-izdelekcontent kosarica {
+izdelekcontent cena {
 	position: absolute;
     bottom: 0;
 	right: 0;
@@ -165,7 +289,20 @@ izdelekcontent kosarica {
 	margin-bottom: 49px;
 	width: 150px;
 	height: 40px;
-	border: 1px solid black;
+	text-align: center;
+	font-size: 25px;
+	box-sizing:border-box;
+	padding-top: 5px;
+}
+
+izdelekcontent kosarica {
+	position: absolute;
+    bottom: 0;
+	right: 0;
+	margin-right: 3px;
+	margin-bottom: 3px;
+	width: 150px;
+	height: 40px;
 }
 
 izdelekmenu {
@@ -193,18 +330,109 @@ faze faza{
 kosaricacontainer {
 	display:flex;
 	flex-flow:row;
+	margin-bottom: 3px;
 }
 
 kosaricacontent {
+	display:flex;
+	flex-flow:row;
+	border: 1px solid black;
+	box-sizing:border-box;
+	margin-top: 3px;
+	margin-right: 3px;
+	width: 610px;
+}
+
+kosaricacontent pregled {
+	margin: 3px;
+}
+
+userinfo {
+	display:block;
+	width: 400px;
+	font-size: 20px;
+	padding: 10px;
+}
+
+userinfo label {
+	width: 200px;
+	margin: 3px;
+}
+
+userinfo input {
+	font-size: 20px;
+}
+
+kosaricacontent form {
+	display:flex;
+	flex-flow:column;
+}
+
+cenakosarica {
 	position: relative;
 	margin: 3px;
-	margin-left: 0;
-	width: 610px;
-	height: 500px;
-	box-sizing:border-box;
 	display: block;
     border: 1px solid black;
-	overflow: hidden;
+	box-sizing:border-box;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 4px;
+	font-size: 25px;
+	background-color: #FFFACD;
+}
+izdelekkosarica {
+	position: relative;
+	display:block;
+	float: left;
+	width: 250px;
+	height: 250px;
+	border: 1px solid black;
+	margin: 10px;
+	padding: 0;
+}
+
+izdelekkosarica ime {
+	position: absolute;
+    top: 0;
+	left: 0;
+	margin-top: 3px;
+	margin-left: 3px;
+	background: #FFFACD;
+	border: 1px solid black;
+	font-size: 20px;
+}
+
+izdelekkosarica album {
+	position: absolute;
+    top: 0;
+	left: 0;
+	margin-top: 33px;
+	margin-left: 3px;
+	background: #FFFACD;
+	border: 1px solid black;
+	font-size: 20px;
+}
+
+izdelekkosarica cena {
+	position: absolute;
+    bottom: 0;
+	right: 0;
+	margin-right: 3px;
+	margin-bottom: 3px;
+	display: block;
+	background: #FFFACD;
+	border: 1px solid black;
+	font-size: 20px;
+}
+
+izdelekkosarica odstrani {
+	position: absolute;
+	border: 1px solid black;
+	top: 0;
+	right: -70px;
+	font-size: 20px;
+	background: #FFFACD;
 }
 
 kosaricahelp {
@@ -223,6 +451,7 @@ kosaricahelp help {
 	display: block;
     border: 1px solid black;
 	overflow: hidden;
+	padding: 3px;
 }
 
 @media screen
@@ -237,6 +466,11 @@ kosaricahelp help {
 		flex-flow: column;
 	}
 	.orodnavrsticabutton {
+		margin-top:0;
+		height: 40px;
+		width: 100vw;
+	}
+	.search {
 		margin-top:0;
 		height: 40px;
 		width: 100vw;
@@ -258,6 +492,7 @@ kosaricahelp help {
 		width: 95vw;
 	}
 	izdelekcontent {
+		margin-left: 0;
 		width: 95vw;
 	}
 	izdelekmenu {
@@ -269,7 +504,7 @@ kosaricahelp help {
 	}
 	faze {
 		flex-flow:column;
-		height: 120px;
+		height: 160px;
 	}
 	faze faza {
 		width: 100vw;
@@ -284,12 +519,29 @@ kosaricahelp help {
 	}
 	kosaricacontent {
 		width: 100vw;
+		flex-flow:column;
 	}
 	kosaricahelp help {
 		width: 100vw;
 	}
 	.nextfaza {
 		width: 100vw;
+	}
+	.nextfazasubmit {
+		width: 100vw;
+	}
+	izdelekkosarica {
+		width: 65vw;
+	}
+	userinfo {
+		width:80vw;
+	}
+	userinfo label {
+		width:80vw;
+	}
+	input[type="checkbox"]:checked ~ div,
+	#popup:target {
+		right:0;
 	}
 }
 
@@ -310,6 +562,7 @@ kosaricahelp help {
 		width: 65vw;
 	}
 	izdelekcontent {
+		margin-left: 0;
 		width: 65vw;
 	}
 	izdelekmenu {
@@ -328,6 +581,16 @@ kosaricahelp help {
 	}
 	.nextfaza {
 		width: 43vw;
+	}
+	.nextfazasubmit {
+		width: 43vw;
+	}
+	izdelekkosarica {
+		width: 28vw;
+	}
+	input[type="checkbox"]:checked ~ div,
+	#popup:target {
+		right:0;
 	}
 }
 
@@ -339,7 +602,7 @@ kosaricahelp help {
 		right: 0;
 	}
 	izdelek {
-		width: 35vw;
+		width: 34vw;
 	}
 	.container {
 		width:100vw;
@@ -348,6 +611,7 @@ kosaricahelp help {
 		width: 75vw;
 	}
 	izdelekcontent {
+		margin-left: 0;
 		width: 75vw;
 	}
 	izdelekmenu {
@@ -363,5 +627,12 @@ kosaricahelp help {
 	}
 	.nextfaza {
 		width: 43vw;
+	}
+	.nextfazasubmit {
+		width: 43vw;
+	}
+	input[type="checkbox"]:checked ~ div,
+	#popup:target {
+		right:0;
 	}
 }

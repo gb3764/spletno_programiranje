@@ -45,17 +45,13 @@
 		</orodnavrstica>
 		
 		<faze class="container">
+			<faza class="faza" style="background-color: #A9A9A9; color:white;">
+				<a href="kosarica_page1.html">pregled košarice</a>
+			</faza>
+			<faza class="faza" style="background-color: #A9A9A9; color:white;">
+				<a href="kosarica_page2.html">podatki plačnika</a>
+			</faza>
 			<faza class="faza" style="background-color: #DEB887;font-style: italic;">
-				<label>
-					pregled košarice
-				</label>
-			</faza>
-			<faza class="faza">
-				<label>
-					podatki plačnika
-				</label>
-			</faza>
-			<faza class="faza">
 				<label>
 					način plačila in dostava
 				</label>
@@ -71,46 +67,34 @@
 			
 			<kosaricacontainer>
 				<kosaricacontent>
-					<izdelki>
-						<izdelekkosarica>
-							<ime>Miles Davis</ime>
-							<album>Kind of Blue</album>
-							<a href="izdelek_page.html">
-								<img src="images/kindofblue.jpg" alt="Kind of Blue">
-							</a>
-							<cena>10,00€</cena>
-							<odstrani>odstrani</odstrani>
-						</izdelekkosarica>
-						<izdelekkosarica>
-							<ime>Nirvana</ime>
-							<album>Nevermind</album>
-							<img src="images/nevermind.jpg" alt="Nevermind">
-							<cena>10,00€</cena>
-							<odstrani>odstrani</odstrani>
-						</izdelekkosarica>
-						<izdelekkosarica>
-							<ime>Slum Village</ime>
-							<album>Fantastic Vol 2</album>
-							<img src="images/fantasticvol2.jpg" alt="Fantastic Vol 2">
-							<cena>8,00€</cena>
-							<odstrani>odstrani</odstrani>
-						</izdelekkosarica>
-					</izdelki>
-					<cenakosarica>
-						28,00€
-					</cenakosarica>
+					<userinfo>
+						<form method="POST" action="kosarica_page4.html">
+							<label><b>Način plačila:</b></label>
+							<fieldset id="nacinplacila">
+								<label><input type="radio" name="nacinplacila" value="placiloobdostavi" checked>plačilo ob dostavi</label>
+								<label><input type="radio" name="nacinplacila" value="predracun">plačilo po predračunu</label>
+								<label><input type="radio" name="nacinplacila" value="paypal">paypal</label>
+							</fieldset>
+							<label><b>Tip dostave:</b></label>
+							<fieldset id="tipdostave">
+								<label><input type="radio" name="tipdostave" value="dostavanadom" checked>dostava na dom</label>
+								<label><input type="radio" name="tipdostave" value="osebniprevzem">osebni prevzem</label>
+							</fieldset>
+							<input type="submit" id="submit-form" style="display:none;" />
+						</form>
+					</userinfo>
 				</kosaricacontent>
 				<kosaricahelp>
 					<help>
 						<p>
-							Če ste z izborom izdelkov zadovoljni, kliknite gumb 'na naslednjo fazo', da nadaljujete z nakupom.
+							Prosimo, izberite način plačila in tip dostave.
 						</p>
 						<p>
-							Če želite odstraniti izdelek iz izbora, kliknite na gumb 'odstrani' na tistem izdelku, ki ga želite odstraniti.
+							Če ste izbrali 'osebni prevzem', lahko naročeno blago prevzamete na sedežu podjetja MusicMarket od ponedeljka do petka od 9h do 15h.
 						</p>
 					</help>
 					<nextfaza>
-						<a href="kosarica_page2.html" class="nextfazasubmit">na naslednjo fazo</a>
+						<label for="submit-form" class="nextfazasubmit">na naslednjo fazo</label>
 					</nextfaza>
 				</kosaricahelp>
 			</kosaricacontainer>

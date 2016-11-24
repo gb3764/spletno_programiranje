@@ -45,12 +45,10 @@
 		</orodnavrstica>
 		
 		<faze class="container">
-			<faza class="faza" style="background-color: #DEB887;font-style: italic;">
-				<label>
-					pregled košarice
-				</label>
+			<faza class="faza" style="background-color: #A9A9A9; color:white;">
+				<a href="kosarica_page1.html">pregled košarice</a>
 			</faza>
-			<faza class="faza">
+			<faza class="faza" style="background-color: #DEB887;font-style: italic;">
 				<label>
 					podatki plačnika
 				</label>
@@ -71,46 +69,27 @@
 			
 			<kosaricacontainer>
 				<kosaricacontent>
-					<izdelki>
-						<izdelekkosarica>
-							<ime>Miles Davis</ime>
-							<album>Kind of Blue</album>
-							<a href="izdelek_page.html">
-								<img src="images/kindofblue.jpg" alt="Kind of Blue">
-							</a>
-							<cena>10,00€</cena>
-							<odstrani>odstrani</odstrani>
-						</izdelekkosarica>
-						<izdelekkosarica>
-							<ime>Nirvana</ime>
-							<album>Nevermind</album>
-							<img src="images/nevermind.jpg" alt="Nevermind">
-							<cena>10,00€</cena>
-							<odstrani>odstrani</odstrani>
-						</izdelekkosarica>
-						<izdelekkosarica>
-							<ime>Slum Village</ime>
-							<album>Fantastic Vol 2</album>
-							<img src="images/fantasticvol2.jpg" alt="Fantastic Vol 2">
-							<cena>8,00€</cena>
-							<odstrani>odstrani</odstrani>
-						</izdelekkosarica>
-					</izdelki>
-					<cenakosarica>
-						28,00€
-					</cenakosarica>
+					<userinfo>
+						<form method="POST" action="kosarica_page3.html">
+							<label>Ime: <br><input type="text" name="ime" placeholder="Ime" required /></label>
+							<label>Priimek: <br><input type="text" name="priimek" placeholder="Priimek" required /></label>
+							<label>Ulica in hišna številka: <br><input type="text" name="ulica" placeholder="Ulica 12" pattern=".* .*" title="'ulica' 'hišna številka'" required /></label>
+							<label>Mesto: <br><input type="text" name="mesto" placeholder="Mesto" required /></label>
+							<label>Poštna številka: <br><input type="text" name="postnastevilka" placeholder="1234" required /></label>
+							<label>Telefon: <br><input type="text" name="telefon" placeholder="031 123 456" required /></label>
+							<label>Email: <br><input type="email" name="email" placeholder="username@email.com" required /></label>
+							<input type="submit" id="submit-form" style="display:none;" />
+						</form>
+					</userinfo>
 				</kosaricacontent>
 				<kosaricahelp>
 					<help>
 						<p>
-							Če ste z izborom izdelkov zadovoljni, kliknite gumb 'na naslednjo fazo', da nadaljujete z nakupom.
-						</p>
-						<p>
-							Če želite odstraniti izdelek iz izbora, kliknite na gumb 'odstrani' na tistem izdelku, ki ga želite odstraniti.
+							Prosimo, vnesite zahtevane osebne podatke.
 						</p>
 					</help>
 					<nextfaza>
-						<a href="kosarica_page2.html" class="nextfazasubmit">na naslednjo fazo</a>
+						<label for="submit-form" class="nextfazasubmit">na naslednjo fazo</label>
 					</nextfaza>
 				</kosaricahelp>
 			</kosaricacontainer>

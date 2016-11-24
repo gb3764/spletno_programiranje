@@ -8,7 +8,6 @@
 	</head>
 	
 	<body>
-		
 		<header class="container">
 			<div class="headerbutton">
 				<label class="bannerbutton">
@@ -45,61 +44,66 @@
 			<input type="search" name="search" class="search" placeholder="iščite tukaj..">
 		</orodnavrstica>
 		
+		<faze class="container">
+			<faza class="faza" style="background-color: #A9A9A9; color:white;">
+				<a href="kosarica_page1.html">pregled košarice</a>
+			</faza>
+			<faza class="faza" style="background-color: #A9A9A9; color:white;">
+				<a href="kosarica_page2.html">podatki plačnika</a>
+			</faza>
+			<faza class="faza" style="background-color: #A9A9A9; color:white;">
+				<a href="kosarica_page3.html">način plačila in dostava</a>
+			</faza>
+			<faza class="faza" style="background-color: #DEB887; border-right: none;font-style: italic;">
+				<label>
+					pregled naročila
+				</label>
+			</faza>
+		</faze>
+		
 		<vsebina class="container">
 			
-			<category>
-				<ul>
-					<li><button type="button" class="category">Pop</button></li>
-					<li><button type="button" class="category">Rock</button></li>
-					<li><button type="button" class="category">Metal</button></li>
-					<li><button type="button" class="category">Electronic</button></li>
-					<li><button type="button" class="category">Hip hop</button></li>
-					<li><button type="button" class="category">Blues</button></li>
-					<li><button type="button" class="category">Jazz</button></li>
-					<li><button type="button" class="category">Classical</button></li>
-				</ul>
-			</category>
-			
-			<main>
-				<izdelek>
-					<ime>Miles Davis</ime>
-					<album>Kind of Blue</album>
-					<a href="izdelek_page.html">
-						<img src="images/kindofblue.jpg" alt="Kind of Blue">
-					</a>
-					<cena>10,00€</cena>
-				</izdelek>
-				<izdelek>
-					<ime>Beatles</ime>
-					<album>Abbey Road</album>
-					<img src="images/abbeyroad.jpg" alt="Abbey Road">
-					<cena>15,00€</cena>
-				</izdelek>
-				<izdelek>
-					<ime>Nirvana</ime>
-					<album>Nevermind</album>
-					<img src="images/nevermind.jpg" alt="Nevermind">
-					<cena>10,00€</cena>
-				</izdelek>
-				<izdelek>
-					<ime>Slum Village</ime>
-					<album>Fantastic Vol 2</album>
-					<img src="images/fantasticvol2.jpg" alt="Fantastic Vol 2">
-					<cena>8,00€</cena>
-				</izdelek>
-				<izdelek>
-					<ime>Deadmau5</ime>
-					<album>Random Album Title</album>
-					<img src="images/randomalbumtitle.jpg" alt="Random Album Title">
-					<cena>10,00€</cena>
-				</izdelek>
-			</main>
-			
+			<kosaricacontainer>
+				<kosaricacontent>
+					<pregled>
+						<b>Naročeni izdelki:</b><br>
+						<ul>
+							<li>Miles Davis - Kind of Blue, 10,00€</li>
+							<li>Nirvana - Nevermind, 10,00€</li>
+							<li>Slum Village - Fantastic Vol 2, 8,00€</li>
+						</ul>
+						<b>Skupna cena: 28,00€</b><br>
+						<br>
+						<b>Naročnik:</b><br>
+						Janez Novak<br>
+						Ulica 12<br>
+						1000 Ljubljana<br>
+						031 123 456<br>
+						janeznovak@mail.com<br>
+						<br>
+						<b>Plačilo: ob dostavi</b><br>
+						<br>
+						<b>Dostava: na dom</b><br>
+					</pregled>
+				</kosaricacontent>
+				<kosaricahelp>
+					<help>
+						<p>
+							Prosimo, potrdite točnost podatkov naročila.
+						</p>
+						<p>
+							Z oddanim naročilom se strinjate s <a href="pogoji_poslovanja.html">pogoji poslovanja</a>.
+						</p>
+					</help>
+					<nextfaza>
+						<a href="landing_page.html" class="nextfazasubmit">oddaj naročilo</a>
+					</nextfaza>
+				</kosaricahelp>
+			</kosaricacontainer>
+
 		</vsebina>
-		
 		<footer class="container">
 			footer
 		</footer>
-		
 	</body>
 </html>
