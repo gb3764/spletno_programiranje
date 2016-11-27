@@ -22,6 +22,10 @@
 	font-family: "serif";
 }
 
+.orodnavrsticabutton:hover {
+	background-color: #B9B9B9;
+}
+
 .bannerbutton {
 	background-color: #A9A9A9;
     color: white;
@@ -34,6 +38,10 @@
 	border-top: 2px solid #e0e0e0;
 	border-left: 2px solid #e0e0e0;
 	box-sizing:border-box;
+}
+
+.bannerbutton:hover {
+	background-color: #B9B9B9;
 }
 
 .search {
@@ -50,6 +58,10 @@
 .category {
 	height: 40px;
 	width: 200px;
+}
+
+.category:hover {
+	background-color: #B9B9B9;
 }
 
 .izdelekbutton {
@@ -92,6 +104,10 @@
 	text-decoration: none;
 }
 
+.nextfazasubmit:hover {
+	background-color: #B9B9B9;
+}
+
 input[type="checkbox"]~ div {
 	display:none;
 }
@@ -131,7 +147,11 @@ faza a {
 	text-decoration: none;
 	color: white;
 	display:block;
-	height: 100%;
+	height: 75%;
+}
+
+faza a:hover {
+	background-color: #B9B9B9;
 }
 
 faza label {
@@ -169,16 +189,13 @@ body {
 header, footer {
     color: white;
     background-color: #8B4513;
+	padding-left: 3px;
 }
 
 orodnavrstica {
 	display:flex;
 	flex-flow:row;
 	height: 120px;
-	background-color: #F5DEB3;
-}
-
-breadcrumb {
 	background-color: #F5DEB3;
 }
 
