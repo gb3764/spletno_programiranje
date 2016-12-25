@@ -1,5 +1,131 @@
 var express = require('express');
 var app = express();
+var Sequelize = require('sequelize');
+
+//PODATKOVNA BAZA
+var connection = new Sequelize('postgres','postgres','postgres', {
+	dialect: 'postgres'
+});
+
+var Uporabniki = connection.define('uporabniki', {
+	uporabniskoIme: {
+		type: Sequelize.CHAR,
+		unique: true,
+		allowNull: false
+	},
+	geslo: {
+		type: Sequelize.CHAR,
+		allowNull: false
+	}
+}, {
+	hooks: {
+		afterValidate: function(uporabnik) {
+			uporabnik.geslo = bcrypt.hashSync(uporabnik.geslo,8);
+		}
+	},
+	timestamps: false,
+	freezeTableName: true
+});
+
+var Izdelki = connection.define('izdelki', {
+	naslov: {
+		type: Sequelize.CHAR,
+		allowNull: false
+	},
+	skladbe: {
+		type: Sequelize.TEXT
+	},
+	cena: {
+		type: Sequelize.FLOAT,
+		allowNull: false
+	}
+}, {
+	timestamps: false,
+	freezeTableName: true
+});
+
+var Izvajalci = connection.define('izvajalci', {
+	izvajalec: {
+		type: Sequelize.CHAR,
+		unique: true,
+		allowNull: false
+	}
+}, {
+	timestamps: false,
+	freezeTableName: true
+});
+
+var Kategorije = connection.define('kategorije', {
+	kategorija: {
+		type: Sequelize.CHAR,
+		unique: true,
+		allowNull: false
+	}
+}, {
+	timestamps: false,
+	freezeTableName: true
+});
+
+Izdelki.belongsTo(Izvajalci);
+Izdelki.belongsTo(Kategorije);
+
+var Narocila = connection.define('narocila', {
+	cena: {
+		type: Sequelize.FLOAT,
+		allowNull: false
+	},
+	ime: {
+		type: Sequelize.CHAR,
+		allowNull: false
+	},
+	priimek: {
+		type: Sequelize.CHAR,
+		allowNull: false
+	},
+	ulica: {
+		type: Sequelize.CHAR,
+		allowNull: false
+	},
+	kraj: {
+		type: Sequelize.CHAR,
+		allowNull: false
+	},
+	telefon: {
+		type: Sequelize.CHAR
+	},
+	email: {
+		type: Sequelize.CHAR,
+	},
+	placilo: {
+		type: Sequelize.CHAR,
+		allowNull: false
+	},
+	dostava: {
+		type: Sequelize.CHAR,
+		allowNull: false
+	},
+	datum: {
+		type: Sequelize.DATE
+	}
+}, {
+	timestamps: false,
+	freezeTableName: true
+});
+
+var IzdelkiVNarocilu = connection.define('izdelkiVNarocilu', {
+	//empty
+}, {
+	timestamps: false,
+	freezeTableName: true
+});
+
+IzdelkiVNarocilu.belongsTo(Narocila);
+IzdelkiVNarocilu.belongsTo(Izdelki);
+
+connection.sync({
+	force: true,
+	logging: console.log
+});
 
 app.use('/public', express.static(__dirname + '/public'));
 
