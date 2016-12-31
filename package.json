@@ -1,0 +1,20 @@
+{
+  "name": "musicmarket",
+  "description": "Spletna trgovina glasbenih albumov.",
+  "author": "Gregor Bajt 63140009",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "multer": "^1.2.1",
+    "sequelize": "^3.28.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gb3764/spletno_programiranje.git"
+  },
+  "main": "server_express.js",
+  "version": "0.0.1",
+  "license": "UNLICENSED"
+}
