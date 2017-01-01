@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Spletna trgovina</title>
+		<link rel="stylesheet" href="public/css/styles.css">
+	</head>
+	
+	<body>
+		<header class="container">
+			<div class="headerbutton">
+				<label class="bannerbutton">
+					<input type="checkbox" style="display:none" required />
+					<span>
+						prijava / registracija
+					</span>
+					<div id="popup">
+						<form method="POST" action="landing_page.html">
+							<label>uporabniško ime: <br><input type="text" name="uporabniskoime" required /></label><br>
+							<label>geslo: <br><input type="password" name="geslo" required /></label><br>
+							<input type="submit" value="Prijavi se" class="bannerbutton" style="margin-top:3px;"/>
+							<input type="submit" value="Registriraj se" class="bannerbutton" style="margin-top:3px;"/>
+						</form>
+					</div>
+				</label>
+				<label class="bannerbutton">
+					<a href="kosarica_page1.html">košarica</a>
+				</label>
+			</div>
+			<h1 style="float:left; margin-left:3px;"><a href="landing_page.html" style="color:white; text-decoration:none;">♫ Music Market</a></h1>
+		</header>
+		
+		<orodnavrstica class="container">
+			<label class="orodnavrsticabutton">
+				<a href="kontakt.html">kontakt</a>
+			</label>
+			<label class="orodnavrsticabutton">
+				<a href="o_nas.html">o nas</a>
+			</label>
+			<label class="orodnavrsticabutton">
+				<a href="pogoji_poslovanja.html">pogoji poslovanja</a>
+			</label>
+			<input type="search" name="search" class="search" placeholder="iščite tukaj..">
+		</orodnavrstica>
+		
+		<faze class="container">
+			<faza class="faza" style="background-color: #DEB887;font-style: italic;">
+				<label>
+					pregled košarice
+				</label>
+			</faza>
+			<faza class="faza">
+				<label>
+					podatki plačnika
+				</label>
+			</faza>
+			<faza class="faza">
+				<label>
+					način plačila in dostava
+				</label>
+			</faza>
+			<faza class="faza" style="border-right: 0; border-bottom: 0;">
+				<label>
+					pregled naročila
+				</label>
+			</faza>
+		</faze>
+		
+		<vsebina class="container">
+			
+			<kosaricacontainer>
+				<kosaricacontent>
+					<izdelki>
+						<izdelekkosarica>
+							<ime>Miles Davis</ime>
+							<album>Kind of Blue</album>
+							<a href="izdelek_page.html">
+								<img src="public/images/kindofblue.jpg" alt="Kind of Blue">
+							</a>
+							<cena>10,00€</cena>
+							<odstrani>odstrani</odstrani>
+						</izdelekkosarica>
+						<izdelekkosarica>
+							<ime>Nirvana</ime>
+							<album>Nevermind</album>
+							<img src="public/images/nevermind.jpg" alt="Nevermind">
+							<cena>10,00€</cena>
+							<odstrani>odstrani</odstrani>
+						</izdelekkosarica>
+						<izdelekkosarica>
+							<ime>Slum Village</ime>
+							<album>Fantastic Vol 2</album>
+							<img src="public/images/fantasticvol2.jpg" alt="Fantastic Vol 2">
+							<cena>8,00€</cena>
+							<odstrani>odstrani</odstrani>
+						</izdelekkosarica>
+					</izdelki>
+					<cenakosarica>
+						28,00€
+					</cenakosarica>
+				</kosaricacontent>
+				<kosaricahelp>
+					<help>
+						<p>
+							Če ste z izborom izdelkov zadovoljni, kliknite gumb 'na naslednjo fazo', da nadaljujete z nakupom.
+						</p>
+						<p>
+							Če želite odstraniti izdelek iz izbora, kliknite na gumb 'odstrani' na tistem izdelku, ki ga želite odstraniti.
+						</p>
+					</help>
+					<nextfaza>
+						<a href="kosarica_page2.html" class="nextfazasubmit">na naslednjo fazo</a>
+					</nextfaza>
+				</kosaricahelp>
+			</kosaricacontainer>
+
+		</vsebina>
+		<footer class="container">
+			by Gregor Bajt
+		</footer>
+	</body>
+</html>

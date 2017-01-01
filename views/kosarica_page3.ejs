@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Spletna trgovina</title>
+		<link rel="stylesheet" href="public/css/styles.css">
+	</head>
+	
+	<body>
+		<header class="container">
+			<div class="headerbutton">
+				<label class="bannerbutton">
+					<input type="checkbox" style="display:none" required />
+					<span>
+						prijava / registracija
+					</span>
+					<div id="popup">
+						<form method="POST" action="landing_page.html">
+							<label>uporabniško ime: <br><input type="text" name="uporabniskoime" required /></label><br>
+							<label>geslo: <br><input type="password" name="geslo" required /></label><br>
+							<input type="submit" value="Prijavi se" class="bannerbutton" style="margin-top:3px;"/>
+							<input type="submit" value="Registriraj se" class="bannerbutton" style="margin-top:3px;"/>
+						</form>
+					</div>
+				</label>
+				<label class="bannerbutton">
+					<a href="kosarica_page1.html">košarica</a>
+				</label>
+			</div>
+			<h1 style="float:left; margin-left:3px;"><a href="landing_page.html" style="color:white; text-decoration:none;">♫ Music Market</a></h1>
+		</header>
+		
+		<orodnavrstica class="container">
+			<label class="orodnavrsticabutton">
+				<a href="kontakt.html">kontakt</a>
+			</label>
+			<label class="orodnavrsticabutton">
+				<a href="o_nas.html">o nas</a>
+			</label>
+			<label class="orodnavrsticabutton">
+				<a href="pogoji_poslovanja.html">pogoji poslovanja</a>
+			</label>
+			<input type="search" name="search" class="search" placeholder="iščite tukaj..">
+		</orodnavrstica>
+		
+		<faze class="container">
+			<faza class="faza" style="background-color: #A9A9A9; color:white;">
+				<a href="kosarica_page1.html">pregled košarice</a>
+			</faza>
+			<faza class="faza" style="background-color: #A9A9A9; color:white;">
+				<a href="kosarica_page2.html">podatki plačnika</a>
+			</faza>
+			<faza class="faza" style="background-color: #DEB887;font-style: italic;">
+				<label>
+					način plačila in dostava
+				</label>
+			</faza>
+			<faza class="faza" style="border-right: 0; border-bottom: 0;">
+				<label>
+					pregled naročila
+				</label>
+			</faza>
+		</faze>
+		
+		<vsebina class="container">
+			
+			<kosaricacontainer>
+				<kosaricacontent>
+					<userinfo>
+						<form method="POST" action="kosarica_page4.html">
+							<label><b>Način plačila:</b></label>
+							<fieldset id="nacinplacila">
+								<label><input type="radio" name="nacinplacila" value="placiloobdostavi" checked>plačilo ob dostavi</label>
+								<label><input type="radio" name="nacinplacila" value="predracun">plačilo po predračunu</label>
+								<label><input type="radio" name="nacinplacila" value="paypal">paypal</label>
+							</fieldset>
+							<label><b>Tip dostave:</b></label>
+							<fieldset id="tipdostave">
+								<label><input type="radio" name="tipdostave" value="dostavanadom" checked>dostava na dom</label>
+								<label><input type="radio" name="tipdostave" value="osebniprevzem">osebni prevzem</label>
+							</fieldset>
+							<input type="submit" id="submit-form" style="display:none;" />
+						</form>
+					</userinfo>
+				</kosaricacontent>
+				<kosaricahelp>
+					<help>
+						<p>
+							Prosimo, izberite način plačila in tip dostave.
+						</p>
+						<p>
+							Če ste izbrali 'osebni prevzem', lahko naročeno blago prevzamete na sedežu podjetja MusicMarket od ponedeljka do petka od 9h do 15h.
+						</p>
+					</help>
+					<nextfaza>
+						<label for="submit-form" class="nextfazasubmit">na naslednjo fazo</label>
+					</nextfaza>
+				</kosaricahelp>
+			</kosaricacontainer>
+
+		</vsebina>
+		<footer class="container">
+			by Gregor Bajt
+		</footer>
+	</body>
+</html>

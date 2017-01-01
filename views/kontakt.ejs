@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Spletna trgovina</title>
+		<link rel="stylesheet" href="public/css/styles.css">
+	</head>
+	
+	<body>
+		<header class="container">
+			<div class="headerbutton">
+				<label class="bannerbutton">
+					<input type="checkbox" style="display:none" required />
+					<span>
+						prijava / registracija
+					</span>
+					<div id="popup">
+						<form method="POST" action="landing_page.html">
+							<label>uporabniško ime: <br><input type="text" name="uporabniskoime" required /></label><br>
+							<label>geslo: <br><input type="password" name="geslo" required /></label><br>
+							<input type="submit" value="Prijavi se" class="bannerbutton" style="margin-top:3px;"/>
+							<input type="submit" value="Registriraj se" class="bannerbutton" style="margin-top:3px;"/>
+						</form>
+					</div>
+				</label>
+				<label class="bannerbutton">
+					<a href="kosarica_page1.html">košarica</a>
+				</label>
+			</div>
+			<h1 style="float:left; margin-left:3px;"><a href="landing_page.html" style="color:white; text-decoration:none;">♫ Music Market</a></h1>
+		</header>
+		
+		<orodnavrstica class="container">
+			<label class="orodnavrsticabutton">
+				<a href="kontakt.html">kontakt</a>
+			</label>
+			<label class="orodnavrsticabutton">
+				<a href="o_nas.html">o nas</a>
+			</label>
+			<label class="orodnavrsticabutton">
+				<a href="pogoji_poslovanja.html">pogoji poslovanja</a>
+			</label>
+			<input type="search" name="search" class="search" placeholder="iščite tukaj..">
+		</orodnavrstica>
+		
+		<vsebina class="container">
+			<genericcontent>
+				<h2>Kontakt</h2>
+				<b>Sedež podjetja:</b><br>
+				MusicMarket d.o.o.<br>
+				Zaloška cesta 13<br>
+				1000 Ljubljana<br>
+				<br>
+				<b>DDV ID številka:</b> SI12345678<br>
+				<b>Zavezanec za DDV:</b> DA<br>
+				<b>Matična številka:</b> 1234123456<br>
+				<b>Osnovni kapital:</b> 1107.00 EUR<br>
+				<b>TRR:</b> SI56 1234 5678 1256 1234<br>
+				<br>
+				<b>E-pošta:</b> info@musicmarket<br>
+				<b>Telefon:</b> 031 123 456
+			</genericcontent>
+		</vsebina>
+		<footer class="container">
+			by Gregor Bajt
+		</footer>
+	</body>
+</html>

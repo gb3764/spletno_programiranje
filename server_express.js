@@ -127,10 +127,18 @@ connection.sync({
 	logging: console.log
 });
 
+//VIEWS
+
+app.set('view engine', 'ejs');
+
+app.get('/', function(req, res) {
+	
+	res.render('landing_page');
+});
+
 app.use('/public', express.static(__dirname + '/public'));
 
-//GET HTML
-app.get('/landing_page.html', function (req, res) {
+/*app.get('/landing_page.html', function (req, res) {
    res.sendFile( __dirname + "/" + "landing_page.html" );
 })
 
@@ -164,7 +172,7 @@ app.get('/kosarica_page3.html', function (req, res) {
 
 app.get('/kosarica_page4.html', function (req, res) {
    res.sendFile( __dirname + "/" + "kosarica_page4.html" );
-})
+})*/
 
 var server = app.listen(8081, function () {
    var host = server.address().address
