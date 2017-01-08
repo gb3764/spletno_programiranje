@@ -7,8 +7,11 @@
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
+    "fs": "0.0.1-security",
     "multer": "^1.2.1",
-    "sequelize": "^3.28.0"
+    "path": "^0.12.7",
+    "sequelize": "^3.28.0",
+    "sequelize-connect": "^2.0.0"
   },
   "repository": {
     "type": "git",
