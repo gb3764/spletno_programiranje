@@ -5,6 +5,8 @@
 		<meta charset = "utf-8">
 		<title>Spletna trgovina</title>
 		<link rel="stylesheet" href="public/css/styles.css">
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+		</script>
 	</head>
 	
 	<body>
@@ -61,38 +63,31 @@
 			</category>
 			
 			<main>
-				<izdelek>
-					<ime>Miles Davis</ime>
-					<album>Kind of Blue</album>
-					<a href="izdelek_page.html">
-						<img src="public/images/kindofblue.jpg" alt="Kind of Blue">
-					</a>
-					<cena>10,00€</cena>
-				</izdelek>
-				<izdelek>
-					<ime>The Beatles</ime>
-					<album>Abbey Road</album>
-					<img src="public/images/abbeyroad.jpg" alt="Abbey Road">
-					<cena>15,00€</cena>
-				</izdelek>
-				<izdelek>
-					<ime>Nirvana</ime>
-					<album>Nevermind</album>
-					<img src="public/images/nevermind.jpg" alt="Nevermind">
-					<cena>10,00€</cena>
-				</izdelek>
-				<izdelek>
-					<ime>Slum Village</ime>
-					<album>Fantastic Vol 2</album>
-					<img src="public/images/fantasticvol2.jpg" alt="Fantastic Vol 2">
-					<cena>8,00€</cena>
-				</izdelek>
-				<izdelek>
-					<ime>Deadmau5</ime>
-					<album>Random Album Title</album>
-					<img src="public/images/randomalbumtitle.jpg" alt="Random Album Title">
-					<cena>10,00€</cena>
-				</izdelek>
+				<% seznamIzdelkov.forEach(function(izdelek) { %>
+					<izdelek>
+						<% var id = izdelek.dataValues.izvajalciId; %>
+						<% var imeIzvajalca; %>
+						<% var identifikator = izdelek.dataValues.naslov.toLowerCase().replace(/ /g, '') %>
+						<% seznamIzvajalcev.forEach(function(izvajalec) { %>
+							<% if (izvajalec.id == id) { %>
+								<% imeIzvajalca = izvajalec.izvajalec; %>
+							<% } %>
+						<% }); %>
+						<ime><%= imeIzvajalca %></ime>
+						<album><%= izdelek.dataValues.naslov %></album>
+						<img id="<%= identifikator %>" src="public/images/<%= identifikator %>.jpg" alt="<%= izdelek.dataValues.naslov %>">
+						<cena><%= izdelek.dataValues.cena %>€</cena>
+					</izdelek>
+					<script>
+						$(document).ready(function() {
+							$("#<%= identifikator %>").click(function() {
+								$.get('/izdelek_page.html', {izvajalec: "<%= imeIzvajalca %>", naslov: "<%= izdelek.dataValues.naslov %>", skladbe: "<%= izdelek.dataValues.skladbe %>", cena: "<%= izdelek.dataValues.cena %>"}, function(data) {
+									document.write(data);
+								});
+							});
+						});
+					</script>
+				<% }); %>
 			</main>
 			
 		</vsebina>

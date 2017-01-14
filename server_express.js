@@ -1,178 +1,36 @@
 var models = require('./models');
 var express = require('express');
+var expressSession = require('express-session');
 var app = express();
+var $ = require('jquery');
 
-models.sequelize.sync({
-  force: true
-})
-
-var models = models.sequelize.models;
-var Izdelki = models.Izdelki;
-var Kategorije = models.Kategorije;
-var Izvajalci = models.Izvajalci;
-
-//PODATKOVNA BAZA
-
-//var Sequelize = require('sequelize');
-//var sequelizeConnect = require('sequelize-connect');
-//var discover = [__dirname + '/models'];
-
-/*sequelizeConnect.discover = [__dirname + '/models'];
-sequelizeConnect.connect(
-	'postgres',
-	'postgres',
-	'postgres',
-	{
-		dialect: 'postgres'
-	}
+app.use(
+  expressSession({
+    secret: '1234567890QWERTY', // Skrivni ključ za podpisovanje piškotkov
+    saveUninitialized: true,    // Novo sejo shranimo
+    resave: false,              // Ne zahtevamo ponovnega shranjevanja
+    cookie: {
+      maxAge: 3600000           // Seja poteče po 60min neaktivnosti
+    }
+  })
 );
 
-sequelizeConnect.sync({
-	force: true,
-	logging: console.log
-});*/
+var Promise = require('bluebird');
+var orm = models.sequelize;
+var modeli;
+var izdelki;
+var kategorije;
+var izvajalci;
 
-//vzpostavitev povezave
-/*var connection = new Sequelize(
-	'postgres',
-	'postgres',
-	'postgres',
-	{
-		dialect: 'postgres'
-	},
-	discover
-);*/
-
-//var models = connection.models;
-
-//definicija tabel
-/*var Uporabniki = connection.define('uporabniki', {
-	uporabniskoIme: {
-		type: Sequelize.CHAR,
-		unique: true,
-		allowNull: false
-	},
-	geslo: {
-		type: Sequelize.CHAR,
-		allowNull: false
-	}
-}, {
-	hooks: {
-		afterValidate: function(uporabnik) {
-			uporabnik.geslo = bcrypt.hashSync(uporabnik.geslo,8);
-		}
-	},
-	timestamps: false,
-	freezeTableName: true
-});*/
-
-/*var Uporabniki = connection.import(__dirname + "/models/uporabniki.model");
-Uporabniki.sync({
-	force: false,
-	logging: console.log
-});*/
-
-/*var Izdelki = connection.define('izdelki', {
-	naslov: {
-		type: Sequelize.CHAR,
-		allowNull: false
-	},
-	skladbe: {
-		type: Sequelize.TEXT
-	},
-	cena: {
-		type: Sequelize.FLOAT,
-		allowNull: false
-	}
-}, {
-	timestamps: false,
-	freezeTableName: true
-});*/
-
-/*var Izvajalci = connection.define('izvajalci', {
-	izvajalec: {
-		type: Sequelize.CHAR,
-		unique: true,
-		allowNull: false
-	}
-}, {
-	timestamps: false,
-	freezeTableName: true
-});*/
-
-/*var Kategorije = connection.define('kategorije', {
-	kategorija: {
-		type: Sequelize.CHAR,
-		unique: true,
-		allowNull: false
-	}
-}, {
-	timestamps: false,
-	freezeTableName: true
-});*/
-
-//Izdelki.belongsTo(Izvajalci);
-//Izdelki.belongsTo(Kategorije);
-
-/*var Narocila = connection.define('narocila', {
-	cena: {
-		type: Sequelize.FLOAT,
-		allowNull: false
-	},
-	ime: {
-		type: Sequelize.CHAR,
-		allowNull: false
-	},
-	priimek: {
-		type: Sequelize.CHAR,
-		allowNull: false
-	},
-	ulica: {
-		type: Sequelize.CHAR,
-		allowNull: false
-	},
-	kraj: {
-		type: Sequelize.CHAR,
-		allowNull: false
-	},
-	telefon: {
-		type: Sequelize.CHAR
-	},
-	email: {
-		type: Sequelize.CHAR,
-	},
-	placilo: {
-		type: Sequelize.CHAR,
-		allowNull: false
-	},
-	dostava: {
-		type: Sequelize.CHAR,
-		allowNull: false
-	},
-	datum: {
-		type: Sequelize.DATE
-	}
-}, {
-	timestamps: false,
-	freezeTableName: true
-});*/
-
-/*var IzdelkiVNarocilu = connection.define('izdelkiVNarocilu', {
-	//empty
-}, {
-	timestamps: false,
-	freezeTableName: true
-});*/
-
-//IzdelkiVNarocilu.belongsTo(Narocila);
-//IzdelkiVNarocilu.belongsTo(Izdelki);
-
-//vstavljanje v bazo
-/*connection.sync({
-	force: false,
-	logging: console.log
-}).then(function () {
-	Kategorije.bulkCreate([
+orm.sync({
+  force: true,
+  logging: console.log
+}).then(function() {
+	modeli = orm.models;
+	izdelki = modeli.izdelki;
+	kategorije = modeli.kategorije;
+	izvajalci = modeli.izvajalci;
+	kategorije.bulkCreate([
 	{
 		kategorija: 'pop'
 	},
@@ -197,7 +55,7 @@ Uporabniki.sync({
 	{
 		kategorija: 'classical'
 	},]);
-	Izvajalci.bulkCreate([
+	izvajalci.bulkCreate([
 	{
 		izvajalec: 'Miles Davis'
 	},
@@ -213,7 +71,7 @@ Uporabniki.sync({
 	{
 		izvajalec: 'Deadmau5'
 	}]);
-	Izdelki.bulkCreate([
+	izdelki.bulkCreate([
 	{
 		naslov: 'Kind of Blue',
 		skladbe: "So What, Freddie Freeloader, Blue in Green, All Blues, Flamenco Sketches",
@@ -249,26 +107,83 @@ Uporabniki.sync({
 		izvajalciId: 2,
 		kategorijeId: 1
 	}]);
-});*/
-
-/*connection.sync({
-	force: false,
-	logging: console.log
-}).then(function () {
-	Izdelki.findAll().then(function(test) {
-		console.log(test[0].dataValues);
-	});
-});*/
-
-//Izdelki.findAll();
+});
 
 //VIEWS
 
 app.set('view engine', 'ejs');
 
-app.get('/', function(req, res) {
+app.get('/landing_page.html', function(req, res) {
 	
-	res.render('landing_page');
+	izdelki.findAll().then(function(seznamIzdelkov) {
+		kategorije.findAll().then(function(seznamKategorij) {
+			izvajalci.findAll().then(function(seznamIzvajalcev) {
+				res.render('landing_page', {
+					seznamIzdelkov: seznamIzdelkov,
+					seznamKategorij: seznamKategorij,
+					seznamIzvajalcev: seznamIzvajalcev
+				});
+			});
+		});
+	});
+});
+
+app.get('/izdelek_page.html', function(req, res) {
+	
+	var apos = "&#39;";
+	var regex = new RegExp(apos, 'g');
+	
+	res.render('izdelek_page', {
+		izvajalec: req.query.izvajalec,
+		naslov: req.query.naslov,
+		skladbe: req.query.skladbe.replace(regex, "'"),
+		cena: req.query.cena
+	});
+});
+
+app.get('/dodajVKosarico', function(req, res) {
+	
+	if (!req.session.kosarica) {
+		
+		req.session.kosarica = [];
+	}
+	var item = {izvajalec: req.query.izvajalec, naslov: req.query.naslov, cena: req.query.cena};
+	req.session.kosarica.push(item);
+	res.send(req.session.kosarica);
+});
+
+app.get('/odstraniIzKosarice', function(req, res) {
+	
+	var index = -1;
+	for (var i=0; i < req.session.kosarica.length; i++) {
+		
+		if (req.session.kosarica[i].naslov == req.query.naslov) {
+			
+			index = i;
+			break;
+		}
+	}
+	
+	if (index > -1) {
+		
+		req.session.kosarica.splice(index, 1);
+	}
+	
+	res.render('kosarica_page1', {
+		kosarica: req.session.kosarica
+	});
+});
+
+app.get('/kosarica_page1.html', function(req, res) {
+	
+	if (!req.session.kosarica) {
+		
+		req.session.kosarica = [];
+	}
+	
+	res.render('kosarica_page1', {
+		kosarica: req.session.kosarica
+	});
 });
 
 app.use('/', express.static(__dirname + '/'));

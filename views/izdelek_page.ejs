@@ -61,26 +61,33 @@
 
 			<mainizdelek>
 				<slika>
-					<img src="public/images/kindofblue.jpg" alt="Kind of Blue">
+					<img src="public/images/<%= naslov.toLowerCase().replace(/ /g, '') %>.jpg" alt="<%= naslov %>">
 				</slika>
 				<izdelekcontent>
 					<content>
 						<naslov>
-							Miles Davis - Kind of Blue
+							<%= izvajalec %> - <%= naslov %>
 						</naslov>
-						<ul>
-							<li>So What</li>
-							<li>Freddie Freeloader</li>
-							<li>Blue in Green</li>
-							<li>All Blues</li>
-							<li>Flamenco Sketches</li>
-						</ul>
+						<h4>Seznam skladb:</h4>
+						<p>
+							<%= skladbe %>
+						</p>
 					</content>
 					<cena>
-						10,00€
+						<%= cena %>€
 					</cena>
 					<kosarica>
-						<button type="button" class="bannerbutton" style="height: 40px; width: 100%;">v košarico</button>
+						<button id="vKosarico" type="button" class="bannerbutton" style="height: 40px; width: 100%;">v košarico</button>
+						<script>
+							$(document).ready(function() {
+								$("#vKosarico").click(function() {
+									$.get('/dodajVKosarico', {naslov: "<%= naslov %>", izvajalec: "<%= izvajalec %>", cena: "<%= cena %>"}, function(data) {
+										//console.log(data);
+										//alert("izdelek '<%= naslov %>' dodan v košarico!");
+									});
+								});
+							});
+						</script>
 					</kosarica>
 				</izdelekcontent>
 			</mainizdelek>

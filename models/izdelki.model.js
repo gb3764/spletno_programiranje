@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
 var Izdelki = sequelize.define('izdelki', {
 	naslov: {
-		type: DataTypes.CHAR,
+		type: DataTypes.TEXT,
 		allowNull: false
 	},
 	skladbe: {

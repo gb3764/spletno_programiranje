@@ -5,6 +5,8 @@
 		<meta charset = "utf-8">
 		<title>Spletna trgovina</title>
 		<link rel="stylesheet" href="public/css/styles.css">
+		<script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js">
+		</script>
 	</head>
 	
 	<body>
@@ -71,33 +73,43 @@
 			
 			<kosaricacontainer>
 				<kosaricacontent>
+					<% var cena = 0.00; %>
 					<izdelki>
-						<izdelekkosarica>
-							<ime>Miles Davis</ime>
-							<album>Kind of Blue</album>
-							<a href="izdelek_page.html">
-								<img src="public/images/kindofblue.jpg" alt="Kind of Blue">
-							</a>
-							<cena>10,00€</cena>
-							<odstrani>odstrani</odstrani>
-						</izdelekkosarica>
-						<izdelekkosarica>
-							<ime>Nirvana</ime>
-							<album>Nevermind</album>
-							<img src="public/images/nevermind.jpg" alt="Nevermind">
-							<cena>10,00€</cena>
-							<odstrani>odstrani</odstrani>
-						</izdelekkosarica>
-						<izdelekkosarica>
-							<ime>Slum Village</ime>
-							<album>Fantastic Vol 2</album>
-							<img src="public/images/fantasticvol2.jpg" alt="Fantastic Vol 2">
-							<cena>8,00€</cena>
-							<odstrani>odstrani</odstrani>
-						</izdelekkosarica>
+						<% kosarica.forEach(function(izdelek) { %>
+							<% cena += parseFloat(izdelek.cena); %>
+							<izdelekkosarica>
+								<% var identifikator = izdelek.naslov.toLowerCase().replace(/ /g, '') %>
+								<ime><%= izdelek.izvajalec %></ime>
+								<album><%= izdelek.naslov %></album>
+								<img id="<%= identifikator %>" src="public/images/<%= identifikator %>.jpg" alt="<%= izdelek.naslov %>">
+								<cena><%= izdelek.cena %>€</cena>
+								<odstrani id="id<%= identifikator %>">odstrani</odstrani>
+								<script>
+									$(document).ready(function() {
+										$("#id<%= identifikator %>").click(function() {
+											console.log("clicked on <%= identifikator %>");
+											$.get('/odstraniIzKosarice', {naslov: "<%= izdelek.naslov %>"}, function(data) {
+												document.write(data);
+												location.reload();
+											});
+										});
+									});
+								</script>
+							</izdelekkosarica>
+						<% }); %>
 					</izdelki>
-					<cenakosarica>
-						28,00€
+					<cenakosarica id="cenakosarica">
+						<script>
+							$(document).ready(function() {
+								var vsota = <%= cena %>;
+								if (vsota == 0) {
+									document.getElementById("cenakosarica").innerHTML = "Ni izdelkov!";
+								}
+								else {
+									document.getElementById("cenakosarica").innerHTML = "<%= cena %>€";
+								}
+							});
+						</script>
 					</cenakosarica>
 				</kosaricacontent>
 				<kosaricahelp>
