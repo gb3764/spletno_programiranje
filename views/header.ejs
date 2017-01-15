@@ -1,0 +1,42 @@
+<div class="headerbutton">
+	<label class="bannerbutton">
+		<input type="checkbox" style="display:none" required />
+		<span id="logger">
+			prijava / registracija
+		</span>
+		<script>
+			var temp = "<%= login %>";
+			console.log(temp);
+			if (temp.length > 0) {
+				$('#logger').html("odjava");
+				$('#logger').click(function() {
+					$.post('/user', {odjava: "odjava"} ,function(data) {
+						document.write(data);
+					});
+				});
+			}
+			else {
+				$('#logger').html("prijava / registracija");
+			}
+		</script>
+		<div id="popup">
+			<% if (login.length == 0) { %>
+				<form method="POST" action="/user">
+					<label>uporabniško ime: <br><input type="text" name="uporabniskoime" required /></label><br>
+					<label>geslo: <br><input type="password" name="geslo" required /></label><br>
+					<input type="submit" name="mode" value="Prijavi se" class="bannerbutton" style="margin-top:3px;"/>
+					<input type="submit" name="mode" value="Registriraj se" class="bannerbutton" style="margin-top:3px;"/>
+				</form>
+				<div id="msg">
+					<script>
+						$('#msg').html("<%= errorMessage %>");
+					</script>
+				</div>
+			<% } %>
+		</div>
+	</label>
+	<label class="bannerbutton">
+		<a href="kosarica_page1.html">košarica</a>
+	</label>
+</div>
+<h1 style="float:left; margin-left:3px;"><a href="landing_page.html" style="color:white; text-decoration:none;">♫ Music Market</a></h1>

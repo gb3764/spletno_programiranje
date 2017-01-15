@@ -2,61 +2,22 @@
 
 <html>
 	<head>
-		<meta charset = "utf-8">
-		<title>Spletna trgovina</title>
-		<link rel="stylesheet" href="public/css/styles.css">
+		<% include head %>
 	</head>
 	
 	<body>
 		<header class="container">
-			<div class="headerbutton">
-				<label class="bannerbutton">
-					<input type="checkbox" style="display:none" required />
-					<span>
-						prijava / registracija
-					</span>
-					<div id="popup">
-						<form method="POST" action="landing_page.html">
-							<label>uporabniško ime: <br><input type="text" name="uporabniskoime" required /></label><br>
-							<label>geslo: <br><input type="password" name="geslo" required /></label><br>
-							<input type="submit" value="Prijavi se" class="bannerbutton" style="margin-top:3px;"/>
-							<input type="submit" value="Registriraj se" class="bannerbutton" style="margin-top:3px;"/>
-						</form>
-					</div>
-				</label>
-				<label class="bannerbutton">
-					<a href="kosarica_page1.html">košarica</a>
-				</label>
-			</div>
-			<h1 style="float:left; margin-left:3px;"><a href="landing_page.html" style="color:white; text-decoration:none;">♫ Music Market</a></h1>
+			<% include header %>
 		</header>
 		
 		<orodnavrstica class="container">
-			<label class="orodnavrsticabutton">
-				<a href="kontakt.html">kontakt</a>
-			</label>
-			<label class="orodnavrsticabutton">
-				<a href="o_nas.html">o nas</a>
-			</label>
-			<label class="orodnavrsticabutton">
-				<a href="pogoji_poslovanja.html">pogoji poslovanja</a>
-			</label>
-			<input type="search" name="search" class="search" placeholder="iščite tukaj..">
+			<% include orodna_vrstica %>
 		</orodnavrstica>
 		
 		<vsebina class="container">
 			
 			<category>
-				<ul>
-					<li><button type="button" class="category">Pop</button></li>
-					<li><button type="button" class="category">Rock</button></li>
-					<li><button type="button" class="category">Metal</button></li>
-					<li><button type="button" class="category">Electronic</button></li>
-					<li><button type="button" class="category">Hip hop</button></li>
-					<li><button type="button" class="category">Blues</button></li>
-					<li><button type="button" class="category">Jazz</button></li>
-					<li><button type="button" class="category">Classical</button></li>
-				</ul>
+				<% include category %>
 			</category>
 
 			<mainizdelek>
@@ -79,14 +40,18 @@
 					<kosarica>
 						<button id="vKosarico" type="button" class="bannerbutton" style="height: 40px; width: 100%;">v košarico</button>
 						<script>
-							$(document).ready(function() {
+							console.log("script");
+							//$(document).ready(function() {
+								console.log("ready");
 								$("#vKosarico").click(function() {
+									console.log("clicked");
 									$.get('/dodajVKosarico', {naslov: "<%= naslov %>", izvajalec: "<%= izvajalec %>", cena: "<%= cena %>"}, function(data) {
+										console.log("got request");
 										//console.log(data);
 										//alert("izdelek '<%= naslov %>' dodan v košarico!");
 									});
 								});
-							});
+							//});
 						</script>
 					</kosarica>
 				</izdelekcontent>

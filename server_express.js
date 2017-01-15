@@ -4,6 +4,7 @@ var expressSession = require('express-session');
 var app = express();
 var $ = require('jquery');
 var bodyParser = require('body-parser');
+var bcrypt = require('bcrypt-nodejs');
 
 app.use(bodyParser.json());
 
@@ -30,6 +31,9 @@ var kategorije;
 var izvajalci;
 var narocila;
 var izdelkiVNarocilu;
+var uporabniki;
+
+//inicializacija baze in vnos podatkov
 
 orm.sync({
   force: true,
@@ -41,6 +45,7 @@ orm.sync({
 	izvajalci = modeli.izvajalci;
 	narocila = modeli.narocila;
 	izdelkiVNarocilu = modeli.izdelkiVNarocilu;
+	uporabniki = modeli.uporabniki;
 	kategorije.bulkCreate([
 	{
 		kategorija: 'pop'
@@ -120,11 +125,22 @@ orm.sync({
 	}]);
 });
 
-//VIEWS
+//views / poslovna logika
 
 app.set('view engine', 'ejs');
 
 app.get('/landing_page.html', function(req, res) {
+	
+	if (!req.session.errmes) {
+		
+		req.session.errmes = [];
+		req.session.errmes[0] = "";
+	}
+	
+	if(!req.session.login) {
+		
+		req.session.login = [];
+	}
 	
 	izdelki.findAll().then(function(seznamIzdelkov) {
 		kategorije.findAll().then(function(seznamKategorij) {
@@ -132,11 +148,18 @@ app.get('/landing_page.html', function(req, res) {
 				res.render('landing_page', {
 					seznamIzdelkov: seznamIzdelkov,
 					seznamKategorij: seznamKategorij,
-					seznamIzvajalcev: seznamIzvajalcev
+					seznamIzvajalcev: seznamIzvajalcev,
+					errorMessage: req.session.errmes[0],
+					login: req.session.login
 				});
 			});
 		});
 	});
+});
+
+app.post('/landing_page.html', function(req, res) {
+	
+	console.log(req);
 });
 
 app.get('/izdelek_page.html', function(req, res) {
@@ -148,7 +171,9 @@ app.get('/izdelek_page.html', function(req, res) {
 		izvajalec: req.query.izvajalec,
 		naslov: req.query.naslov,
 		skladbe: req.query.skladbe.replace(regex, "'"),
-		cena: req.query.cena
+		cena: req.query.cena,
+		errorMessage: req.session.errmes[0],
+		login: req.session.login
 	});
 });
 
@@ -160,6 +185,9 @@ app.get('/dodajVKosarico', function(req, res) {
 	}
 	var item = {izvajalec: req.query.izvajalec, naslov: req.query.naslov, cena: req.query.cena};
 	req.session.kosarica.push(item);
+	
+	console.log(req.session.kosarica);
+	
 	res.send(req.session.kosarica);
 });
 
@@ -181,7 +209,9 @@ app.get('/odstraniIzKosarice', function(req, res) {
 	}
 	
 	res.render('kosarica_page1', {
-		kosarica: req.session.kosarica
+		kosarica: req.session.kosarica,
+		errorMessage: req.session.errmes[0],
+		login: req.session.login
 	});
 });
 
@@ -192,8 +222,20 @@ app.get('/kosarica_page1.html', function(req, res) {
 		req.session.kosarica = [];
 	}
 	
+	console.log(req.session.kosarica);
+	
 	res.render('kosarica_page1', {
-		kosarica: req.session.kosarica
+		kosarica: req.session.kosarica,
+		errorMessage: req.session.errmes[0],
+		login: req.session.login
+	});
+});
+
+app.get('/kosarica_page2.html', function(req, res) {
+	
+	res.render('kosarica_page2', {		
+		errorMessage: req.session.errmes[0],
+		login: req.session.login
 	});
 });
 
@@ -207,7 +249,10 @@ app.post('/kosarica_page3.html', function(req, res) {
 	var racun = req.body;
 	req.session.racun[0] = racun;
 	
-	res.render('kosarica_page3');
+	res.render('kosarica_page3', {		
+		errorMessage: req.session.errmes[0],
+		login: req.session.login
+	});
 });
 
 app.post('/kosarica_page4.html', function(req, res) {
@@ -223,7 +268,9 @@ app.post('/kosarica_page4.html', function(req, res) {
 	res.render('kosarica_page4', {
 		kosarica: req.session.kosarica,
 		racun: req.session.racun,
-		dostava: req.session.dostava
+		dostava: req.session.dostava,
+		errorMessage: req.session.errmes[0],
+		login: req.session.login
 	});
 });
 
@@ -234,6 +281,11 @@ app.get('/oddajNarocilo', function(req, res) {
 		
 		cena += parseFloat(izdelek.cena);
 	});
+	
+	if (req.session.login.length > 0) {
+		
+		cena *= 0.95;
+	}
 	
 	var today = new Date();
 	var dd = today.getDate();
@@ -284,9 +336,111 @@ app.get('/oddajNarocilo', function(req, res) {
 	});
 });
 
+app.post('/user', function(req, res) {
+
+	if (req.body.mode == "Prijavi se") {
+		
+		uporabniki.findAll({
+			where: {
+				uporabniskoIme: req.body.uporabniskoime
+			}
+		}).then(function(uporabnik) {
+				
+				if (uporabnik.length == 0) {
+				
+					req.session.errmes[0] = "Uporabniško ime ne obstaja!";
+					res.redirect('landing_page.html');
+				}
+				else if (!bcrypt.compareSync(req.body.geslo, uporabnik[0].geslo)) {
+					
+					req.session.errmes[0] = "Napačno geslo!";
+					res.redirect('landing_page.html');
+				}
+				else {
+					
+					//req.session.destroy();
+					req.session.kosarica = [];
+					req.session.racun = [];
+					req.session.dostava = [];
+					req.session.errmes[0] = "";
+					req.session.login = [];
+					req.session.login[0] = uporabnik[0].uporabniskoIme;
+					res.redirect('landing_page.html');
+				}
+		});
+	}
+	
+	else if (req.body.mode == "Registriraj se") {
+		
+		uporabniki.findAll({
+			where: {
+				uporabniskoIme: req.body.uporabniskoime
+			}
+		}).then(function(uporabnik) {
+				if (uporabnik.length > 0) {
+					
+					req.session.errmes[0] = "Uporabniško ime že obstaja!";
+					res.redirect('landing_page.html');
+				}
+				else {
+				
+					uporabniki.create({
+						uporabniskoIme: req.body.uporabniskoime,
+						geslo: req.body.geslo
+					}).then(function(uporabnik) {
+					
+						//req.session.destroy();
+						req.session.kosarica = [];
+						req.session.racun = [];
+						req.session.dostava = [];
+						req.session.errmes[0] = "";
+						req.session.login = [];
+						req.session.login[0] = uporabnik.uporabniskoIme;
+						res.redirect('landing_page.html');
+					});
+				}
+		});
+	}
+	else if (req.body.odjava == "odjava") {
+		
+		//req.session.destroy();
+		req.session.kosarica = [];
+		req.session.racun = [];
+		req.session.dostava = [];
+		req.session.login = [];
+		req.session.errmes[0] = "";
+		res.redirect('landing_page.html');
+	}
+});
+
+app.get('/o_nas.html', function(req, res) {
+	
+	res.render('o_nas', {
+		errorMessage: req.session.errmes[0],
+		login: req.session.login
+	});
+});
+
+app.get('/kontakt.html', function(req, res) {
+	
+	res.render('kontakt', {
+		errorMessage: req.session.errmes[0],
+		login: req.session.login
+	});
+});
+
+app.get('/pogoji_poslovanja.html', function(req, res) {
+	
+	res.render('pogoji_poslovanja', {
+		errorMessage: req.session.errmes[0],
+		login: req.session.login
+	});
+});
+
 app.use('/', express.static(__dirname + '/'));
 
 //vklop strežnika
+
 var server = app.listen(8081, function () {
    var host = server.address().address
    var port = server.address().port

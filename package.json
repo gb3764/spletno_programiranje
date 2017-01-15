@@ -3,6 +3,7 @@
   "description": "Spletna trgovina glasbenih albumov.",
   "author": "Gregor Bajt 63140009",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",

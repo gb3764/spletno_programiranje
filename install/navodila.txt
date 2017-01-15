@@ -1,0 +1,1 @@
+Aplikacija je razvita na Windows platformi. Za delovanje potrebuje Node.js ter pripadajoèe knjižnice, ki se jih naloži z ukazom 'npm install'.
