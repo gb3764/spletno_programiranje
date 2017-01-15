@@ -3,14 +3,21 @@ var express = require('express');
 var expressSession = require('express-session');
 var app = express();
 var $ = require('jquery');
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({
+  extended: true
+})); 
 
 app.use(
   expressSession({
-    secret: '1234567890QWERTY', // Skrivni ključ za podpisovanje piškotkov
-    saveUninitialized: true,    // Novo sejo shranimo
-    resave: false,              // Ne zahtevamo ponovnega shranjevanja
+    secret: '1234567890QWERTY',
+    saveUninitialized: true,
+    resave: false,
     cookie: {
-      maxAge: 3600000           // Seja poteče po 60min neaktivnosti
+      maxAge: 3600000
     }
   })
 );
@@ -21,6 +28,8 @@ var modeli;
 var izdelki;
 var kategorije;
 var izvajalci;
+var narocila;
+var izdelkiVNarocilu;
 
 orm.sync({
   force: true,
@@ -30,6 +39,8 @@ orm.sync({
 	izdelki = modeli.izdelki;
 	kategorije = modeli.kategorije;
 	izvajalci = modeli.izvajalci;
+	narocila = modeli.narocila;
+	izdelkiVNarocilu = modeli.izdelkiVNarocilu;
 	kategorije.bulkCreate([
 	{
 		kategorija: 'pop'
@@ -183,6 +194,93 @@ app.get('/kosarica_page1.html', function(req, res) {
 	
 	res.render('kosarica_page1', {
 		kosarica: req.session.kosarica
+	});
+});
+
+app.post('/kosarica_page3.html', function(req, res) {
+	
+	if (!req.session.racun) {
+		
+		req.session.racun = [];
+	}
+	
+	var racun = req.body;
+	req.session.racun[0] = racun;
+	
+	res.render('kosarica_page3');
+});
+
+app.post('/kosarica_page4.html', function(req, res) {
+	
+	if (!req.session.dostava) {
+		
+		req.session.dostava = [];
+	}
+	
+	var dostava = req.body;
+	req.session.dostava[0] = dostava;
+	
+	res.render('kosarica_page4', {
+		kosarica: req.session.kosarica,
+		racun: req.session.racun,
+		dostava: req.session.dostava
+	});
+});
+
+app.get('/oddajNarocilo', function(req, res) {
+	
+	var cena = 0.00;
+	req.session.kosarica.forEach(function(izdelek) {
+		
+		cena += parseFloat(izdelek.cena);
+	});
+	
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth() + 1;
+	var yyyy = today.getFullYear();
+	
+	if (dd < 10) {
+		
+		dd='0'+dd;
+	} 
+	if (mm < 10) {
+		
+		mm='0'+mm;
+	} 
+
+	today = mm+'/'+dd+'/'+yyyy;
+	
+	narocila.create({
+		cena: cena,
+		ime: req.session.racun[0].ime,
+		priimek: req.session.racun[0].priimek,
+		ulica: req.session.racun[0].ulica,
+		kraj: req.session.racun[0].mesto,
+		telefon: req.session.racun[0].telefon,
+		email: req.session.racun[0].email,
+		placilo: req.session.dostava[0].nacinplacila,
+		dostava: req.session.dostava[0].tipdostave,
+		datum: today
+	}).then(function(narocilo) {
+		
+		req.session.kosarica.forEach(function(izdelek) {
+
+			izdelki.findAll({
+				where: {
+					naslov: izdelek.naslov
+				},
+				attributes: ['id']
+			}).then(function(izdelekBaza) {
+				izdelkiVNarocilu.create({
+					narocilaId: narocilo.id,
+					izdelkiId: izdelekBaza[0].id
+				});
+			});
+		});
+	}).then(function() {
+		req.session.kosarica = [];
+		res.redirect('landing_page.html');
 	});
 });
 

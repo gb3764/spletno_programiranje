@@ -122,7 +122,16 @@
 						</p>
 					</help>
 					<nextfaza>
-						<a href="kosarica_page2.html" class="nextfazasubmit">na naslednjo fazo</a>
+						<% var urlThis = "kosarica_page1.html"; %>
+						<% var urlNext = "kosarica_page2.html"; %>
+						<% var url; %>
+						<% if (cena == 0) { %>
+							<% url = urlThis; %>
+						<% } %>
+						<% if (cena > 0) { %>
+							<% url = urlNext; %>
+						<% } %>
+						<a href="<%= url %>" class="nextfazasubmit">na naslednjo fazo</a>
 					</nextfaza>
 				</kosaricahelp>
 			</kosaricacontainer>

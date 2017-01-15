@@ -68,22 +68,26 @@
 					<pregled>
 						<b>Naročeni izdelki:</b><br>
 						<ul>
-							<li>Miles Davis - Kind of Blue, 10,00€</li>
-							<li>Nirvana - Nevermind, 10,00€</li>
-							<li>Slum Village - Fantastic Vol 2, 8,00€</li>
+							<% var vsota = 0.00 %>
+							<% kosarica.forEach(function(izdelek) { %>
+								<li><%= izdelek.izvajalec %> - <%= izdelek.naslov %>, <%= izdelek.cena %>€</li>
+								<% vsota += parseFloat(izdelek.cena); %>
+							<% }); %>
 						</ul>
-						<b>Skupna cena: 28,00€</b><br>
+						<b>Skupna cena: <%= vsota %>€</b><br>
 						<br>
 						<b>Naročnik:</b><br>
-						Janez Novak<br>
-						Ulica 12<br>
-						1000 Ljubljana<br>
-						031 123 456<br>
-						janeznovak@mail.com<br>
+						<% console.log(racun) %>
+						<% console.log(dostava) %>
+						<%= racun[0].ime %> <%= racun[0].priimek %><br>
+						<%= racun[0].ulica %><br>
+						<%= racun[0].postnastevilka %> <%= racun[0].mesto %><br>
+						<%= racun[0].telefon %><br>
+						<%= racun[0].email %><br>
 						<br>
-						<b>Plačilo: ob dostavi</b><br>
+						<b>Plačilo: <%= dostava[0].nacinplacila %></b><br>
 						<br>
-						<b>Dostava: na dom</b><br>
+						<b>Dostava: <%= dostava[0].tipdostave %></b><br>
 					</pregled>
 				</kosaricacontent>
 				<kosaricahelp>
@@ -96,7 +100,7 @@
 						</p>
 					</help>
 					<nextfaza>
-						<a href="landing_page.html" class="nextfazasubmit">oddaj naročilo</a>
+						<a href="/oddajNarocilo" class="nextfazasubmit">oddaj naročilo</a>
 					</nextfaza>
 				</kosaricahelp>
 			</kosaricacontainer>
