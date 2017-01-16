@@ -2,6 +2,9 @@
   "name": "musicmarket",
   "description": "Spletna trgovina glasbenih albumov.",
   "author": "Gregor Bajt 63140009",
+  "engines": {
+	"node": "6.9.2"
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.7",
