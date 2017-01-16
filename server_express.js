@@ -129,6 +129,11 @@ orm.sync({
 
 app.set('view engine', 'ejs');
 
+app.get('/', function(req, res) {
+	
+	res.redirect('landing_page.html');
+});
+
 app.get('/landing_page.html', function(req, res) {
 	
 	if (!req.session.errmes) {
